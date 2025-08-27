@@ -30,3 +30,7 @@ textarea {
 button {
   padding: 16px 40px;
 }
+
+.green--600 {
+  color: #0C7D69;
+}

@@ -14,22 +14,22 @@ const Contactform = () => {
           {/* names */}
           <div className="name__fields flex flex-row w-full justify-between mb-[24px]">
             <div className="first__name w-[320px] h-[83px]">
-              <div className="first__name--text mb-[8px]">First Name *</div>
+              <div className="first__name--text mb-[8px]">First Name <span className="green--600 ml-[8px]">*</span></div>
               <input className="w-full " type="text" />
             </div>
             <div className="last__name w-[320px] h-[83px]">
-              <div className="last__name--text mb-[8px]">Last Name *</div>
+              <div className="last__name--text mb-[8px]">Last Name <span className="green--600 ml-[8px]">*</span></div>
               <input className="w-full " type="text" />
             </div>
           </div>
           {/* email */}
           <div className="email__field mb-[24px] w-full">
-            <div className="email mb-[8px]">Email Address *</div>
+            <div className="email mb-[8px]">Email Address <span className="green--600 ml-[8px]">*</span></div>
             <input className="w-full" type="email" />
           </div>
           {/* query type */}
           <div className="query__type w-full h-[91px] mb-[24px]">
-            <div className="query__title mb-[16px]">Query Type *</div>
+            <div className="query__title mb-[16px]">Query Type <span className="green--600 ml-[8px]">*</span></div>
 
             <div className="query__boxes flex flex-row w-full justify-between">
               <div className="query__general w-[320px] h-[51px] query__box flex flex-row items-center">
@@ -60,7 +60,7 @@ const Contactform = () => {
           </div>
           {/* Message */}
           <div className="message__field h-[137px] w-full">
-            <div className="message--text mb-[8px]">Message * </div>
+            <div className="message--text mb-[8px]">Message <span className="green--600 ml-[8px]">*</span> </div>
             <textarea
               className="message__box w-full  h-[105px] text-[18px]"
               rows={3}
@@ -78,7 +78,7 @@ const Contactform = () => {
           className="flex-shrink-0 mr-2"
         />
         <div className="consent__text">
-          I consent to being contacted by the team *
+          I consent to being contacted by the team <span className="green--600 ml-[8px]">*</span>
         </div>
       </div>
       {/* submit */}

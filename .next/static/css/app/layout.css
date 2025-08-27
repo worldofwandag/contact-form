@@ -215,6 +215,18 @@ font-style: italic;
   .mb-\[40px\] {
     margin-bottom: 40px;
   }
+  .ml-\[2px\] {
+    margin-left: 2px;
+  }
+  .ml-\[3px\] {
+    margin-left: 3px;
+  }
+  .ml-\[7px\] {
+    margin-left: 7px;
+  }
+  .ml-\[8px\] {
+    margin-left: 8px;
+  }
   .contents {
     display: contents;
   }
@@ -290,12 +302,6 @@ font-style: italic;
   .bg-\[\#2A4144\] {
     background-color: #2A4144;
   }
-  .bg-\[\#2A\] {
-    background-color: #2A;
-  }
-  .bg-\[\#2\] {
-    background-color: #2;
-  }
   .bg-\[\#E0F1E8\] {
     background-color: #E0F1E8;
   }
@@ -364,6 +370,9 @@ textarea {
 }
 button {
   padding: 16px 40px;
+}
+.green--600 {
+  color: #0C7D69;
 }
 @property --tw-leading {
   syntax: "*";
