@@ -8,3 +8,9 @@
 body {
   font-family: var(--font-karla);
 }
+
+input {
+  border: 1px solid #86A285;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
