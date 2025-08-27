@@ -33,6 +33,7 @@ font-style: italic;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-white: #fff;
+    --spacing: 0.25rem;
     --font-weight-bold: 700;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
@@ -196,11 +197,23 @@ font-style: italic;
   .mx-auto {
     margin-inline: auto;
   }
+  .mr-2 {
+    margin-right: calc(var(--spacing) * 2);
+  }
   .mb-\[8px\] {
     margin-bottom: 8px;
   }
+  .mb-\[16px\] {
+    margin-bottom: 16px;
+  }
+  .mb-\[24px\] {
+    margin-bottom: 24px;
+  }
   .mb-\[32px\] {
     margin-bottom: 32px;
+  }
+  .mb-\[40px\] {
+    margin-bottom: 40px;
   }
   .contents {
     display: contents;
@@ -211,20 +224,29 @@ font-style: italic;
   .table {
     display: table;
   }
-  .h-\[15px\] {
-    height: 15px;
+  .h-\[51px\] {
+    height: 51px;
+  }
+  .h-\[59px\] {
+    height: 59px;
   }
   .h-\[83px\] {
     height: 83px;
   }
-  .min-h-\[736px\] {
-    min-height: 736px;
+  .h-\[91px\] {
+    height: 91px;
+  }
+  .h-\[105px\] {
+    height: 105px;
+  }
+  .h-\[137px\] {
+    height: 137px;
+  }
+  .min-h-\[773px\] {
+    min-height: 773px;
   }
   .min-h-screen {
     min-height: 100vh;
-  }
-  .w-\[50px\] {
-    width: 50px;
   }
   .w-\[320px\] {
     width: 320px;
@@ -235,29 +257,11 @@ font-style: italic;
   .w-\[736px\] {
     width: 736px;
   }
-  .w-\[773px\] {
-    width: 773px;
-  }
   .w-full {
     width: 100%;
   }
-  .max-w-\[656px\] {
-    max-width: 656px;
-  }
-  .min-w-\[65\] {
-    min-width: 65;
-  }
-  .min-w-\[320px\] {
-    min-width: 320px;
-  }
-  .min-w-\[320w\] {
-    min-width: 320w;
-  }
-  .min-w-\[656px\] {
-    min-width: 656px;
-  }
-  .min-w-\[773px\] {
-    min-width: 773px;
+  .flex-shrink-0 {
+    flex-shrink: 0;
   }
   .flex-col {
     flex-direction: column;
@@ -274,14 +278,23 @@ font-style: italic;
   .justify-center {
     justify-content: center;
   }
-  .rounded-\[3\%\] {
-    border-radius: 3%;
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
-  .rounded-\[5\%\] {
-    border-radius: 5%;
+  .rounded-\[8px\] {
+    border-radius: 8px;
   }
   .rounded-\[16px\] {
     border-radius: 16px;
+  }
+  .bg-\[\#2A4144\] {
+    background-color: #2A4144;
+  }
+  .bg-\[\#2A\] {
+    background-color: #2A;
+  }
+  .bg-\[\#2\] {
+    background-color: #2;
   }
   .bg-\[\#E0F1E8\] {
     background-color: #E0F1E8;
@@ -292,16 +305,15 @@ font-style: italic;
   .p-\[40px\] {
     padding: 40px;
   }
+  .text-\[18px\] {
+    font-size: 18px;
+  }
   .text-\[32px\] {
     font-size: 32px;
   }
-  .leading-\[-1px\] {
-    --tw-leading: -1px;
-    line-height: -1px;
-  }
-  .leading-\[-5px\] {
-    --tw-leading: -5px;
-    line-height: -5px;
+  .leading-\[150\%\] {
+    --tw-leading: 150%;
+    line-height: 150%;
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
@@ -311,12 +323,11 @@ font-style: italic;
     --tw-tracking: -1px;
     letter-spacing: -1px;
   }
-  .tracking-\[-5px\] {
-    --tw-tracking: -5px;
-    letter-spacing: -5px;
-  }
   .text-\[\#2A4144\] {
     color: #2A4144;
+  }
+  .text-white {
+    color: var(--color-white);
   }
   .italic {
     font-style: italic;
@@ -340,6 +351,19 @@ input {
   border: 1px solid #86A285;
   border-radius: 8px;
   padding: 12px 24px;
+}
+textarea {
+  border: 1px solid #86A285;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+.query__box {
+  border: 1px solid #86A285;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+button {
+  padding: 16px 40px;
 }
 @property --tw-leading {
   syntax: "*";

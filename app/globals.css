@@ -14,3 +14,19 @@ input {
   border-radius: 8px;
   padding: 12px 24px;
 }
+
+textarea {
+  border: 1px solid #86A285;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+
+.query__box {
+  border: 1px solid #86A285;
+  border-radius: 8px;
+  padding: 12px 24px;
+}
+
+button {
+  padding: 16px 40px;
+}
