@@ -1,16 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import radioDeselect from "../assets/images/icon-radio-deselected.png";
 import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
 
 const Contactform = () => {
+  //create object to send to emailjs
+  const [formData, setFormData] = useState({
+    name: "",
+    last_name: "",
+    email: "",
+    message: "",
+  });
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+  //for state of submit button and what shows in the button when it's submitting or when it's not
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault;
+    setIsSubmitting(true);
+    try {
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS configuration missing");
+      }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          last_name: formData.last_name,
+          email: formData.email,
+          message: formData.message,
+        },
+        publicKey
+      );
+
+      alert("Message sent successfully!");
+      // Reset form
+      setFormData({
+        name: "",
+        last_name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send message. Please try again");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="card__container flex flex-col bg-white min-h-[773px] w-[736px] rounded-[16px] p-[40px] ">
-      <div className="form__content w-[656px] mx-auto mb-[40px]">
+      <form className="form__content w-[656px] mx-auto mb-[40px]">
         <h1 className="card__title text-[32px] font-bold text-[#2A4144] tracking-[-1px] mb-[32px]">
           Contact Us
         </h1>
@@ -81,7 +137,7 @@ const Contactform = () => {
             />
           </div>
         </div>
-      </div>
+      </form>
       {/* consent */}
       <div className="consent__container flex flex-row gap-2 mb-[40px]">
         <Image
@@ -89,9 +145,9 @@ const Contactform = () => {
           alt="checkbox empty"
           width={24}
           height={24}
-          className="flex-shrink-0 mr-2"
+          className="flex-shrink-0 mr-2 cursor-pointer"
         />
-        <div className="consent__text">
+        <div className="consent__text ">
           I consent to being contacted by the team{" "}
           <span className="green--600 ml-[8px]">*</span>
         </div>
