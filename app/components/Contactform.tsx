@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import radioDeselect from "../assets/images/icon-radio-deselected.png";
 import radioSelect from "../assets/images/icon-radio-selected.svg"
 import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
+import checkboxChecked from "../assets/images/icon-checkbox-check.svg"
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 
@@ -19,6 +20,7 @@ const Contactform = () => {
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
   //for state of submit button and what shows in the button when it's submitting or when it's not
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConsentChecked, setIsConsentChecked] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,6 +38,10 @@ const Contactform = () => {
       query_type: queryType,
     }));
   };
+
+  const handleConsentToggle = () => {
+    setIsConsentChecked((prev) => !prev);
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault;
@@ -153,7 +159,7 @@ const Contactform = () => {
               </div>
               <div className={`query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer
                 ${
-                  formData.query_type === 'Suppor Request'
+                  formData.query_type === 'Support Request'
                   ? "bg-[#E0F1E8] border-[#0C7D69]"
                   : "bg-white"
                 }`}
@@ -191,11 +197,12 @@ const Contactform = () => {
       {/* consent */}
       <div className="consent__container flex flex-row gap-2 mb-[40px]">
         <Image
-          src={checkboxEmpty}
-          alt="checkbox empty"
+          src={isConsentChecked ? checkboxChecked : checkboxEmpty}
+          alt={isConsentChecked ? 'checkboxChecked' : 'checkboxEmpty'}
           width={24}
           height={24}
           className="flex-shrink-0 mr-2 cursor-pointer"
+          onClick={handleConsentToggle}
         />
         <div className="consent__text ">
           I consent to being contacted by the team{" "}
