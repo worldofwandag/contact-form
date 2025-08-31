@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import radioDeselect from "../assets/images/icon-radio-deselected.png";
+import radioSelect from "../assets/images/icon-radio-selected.svg"
 import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
@@ -11,6 +12,7 @@ const Contactform = () => {
     last_name: "",
     email: "",
     message: "",
+    query_type: "",
   });
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -25,6 +27,13 @@ const Contactform = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleQueryTypeSelect = (queryType: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      query_type: queryType,
     }));
   };
 
@@ -44,6 +53,7 @@ const Contactform = () => {
           last_name: formData.last_name,
           email: formData.email,
           message: formData.message,
+          query_type: formData.query_type,
         },
         publicKey
       );
@@ -55,6 +65,7 @@ const Contactform = () => {
         last_name: "",
         email: "",
         message: "",
+        query_type: "",
       });
     } catch (error) {
       console.error("Error sending email:", error);
@@ -77,13 +88,27 @@ const Contactform = () => {
               <div className="first__name--text mb-[8px]">
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
-              <input className="w-full " type="text" />
+              <input
+                className="w-full"
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
             </div>
             <div className="last__name w-[320px] h-[83px]">
               <div className="last__name--text mb-[8px]">
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
-              <input className="w-full " type="text" />
+              <input
+                className="w-full"
+                type="text"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </div>
           {/* email */}
@@ -91,7 +116,14 @@ const Contactform = () => {
             <div className="email mb-[8px]">
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
-            <input className="w-full" type="email" />
+            <input
+                className="w-full"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
           </div>
           {/* query type */}
           <div className="query__type w-full h-[91px] mb-[24px]">
@@ -100,10 +132,17 @@ const Contactform = () => {
             </div>
 
             <div className="query__boxes flex flex-row w-full justify-between">
-              <div className="query__general w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer">
+              <div className={`query__general w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer
+                ${
+                  formData.query_type === 'General Enquiry'
+                  ? "bg-[#E0F1E8] border-[#0C7D69]"
+                  : "bg-white"
+                }`}
+                onClick={() => handleQueryTypeSelect('General Enquiry')}
+                >
                 <Image
-                  src={radioDeselect}
-                  alt="radio deselect"
+                  src={formData.query_type === 'General Enquiry' ? radioSelect : radioDeselect}
+                  alt="radio select"
                   width={24}
                   height={24}
                   className="flex-shrink-0 mr-2"
@@ -112,10 +151,17 @@ const Contactform = () => {
                   General Enquiry
                 </div>
               </div>
-              <div className="query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer">
+              <div className={`query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer
+                ${
+                  formData.query_type === 'Suppor Request'
+                  ? "bg-[#E0F1E8] border-[#0C7D69]"
+                  : "bg-white"
+                }`}
+                onClick={() => handleQueryTypeSelect('Support Request')}
+                >
                 <Image
-                  src={radioDeselect}
-                  alt="radio deselect"
+                  src={formData.query_type === 'Support Request' ? radioSelect : radioDeselect}
+                  alt="radio select"
                   width={24}
                   height={24}
                   className="flex-shrink-0 mr-2"
@@ -134,6 +180,10 @@ const Contactform = () => {
             <textarea
               className="message__box w-full  h-[105px] text-[18px]"
               rows={3}
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              required
             />
           </div>
         </div>
@@ -153,8 +203,12 @@ const Contactform = () => {
         </div>
       </div>
       {/* submit */}
-      <button className="submit__button w-full h-[59px] rounded-[8px] bg-[#2A4144] text-white text-[18px] font-bold leading-[150%] cursor-pointer">
-        Submit
+      <button 
+      type="submit"
+      disabled={isSubmitting}
+      onClick={handleSubmit}
+      className="submit__button w-full h-[59px] rounded-[8px] bg-[#2A4144] text-white text-[18px] font-bold leading-[150%] cursor-pointer">
+        {isSubmitting ? 'Sending...' : 'Submit'}
       </button>
     </div>
   );
