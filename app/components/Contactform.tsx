@@ -3,9 +3,11 @@ import radioDeselect from "../assets/images/icon-radio-deselected.png";
 import radioSelect from "../assets/images/icon-radio-selected.svg";
 import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
 import checkboxChecked from "../assets/images/icon-checkbox-check.svg";
+import messageSuccess from "../assets/images/icon-success-check.svg"
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { z } from "zod";
+import { Toaster, toast } from "react-hot-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, "This field is required"),
@@ -16,6 +18,24 @@ const formSchema = z.object({
 });
 
 const Contactform = () => {
+  const customToast = () => (
+  <div className="flex flex-col text-white bg-[#2A4144] p-[24px] rounded-[12px] w-[450px] min-h-[107px]">
+    <div className="flex items-center mb-2">
+      <Image
+        src={messageSuccess}
+        alt="success"
+        width={24}
+        height={24}
+        className="flex-shrink-0 mr-2"
+      />
+      <span className="text-[18px] font-bold">Message sent!</span>
+    </div>
+    <span className="text-[16px] tracking-tighter">
+      Thanks for completing the form, we will be in touch soon
+    </span>
+  </div>
+);
+
   //create object to send to emailjs
   const [formData, setFormData] = useState({
     name: "",
@@ -119,9 +139,14 @@ const Contactform = () => {
         publicKey
       );
 
-      alert(
-        "Message Sent! Thanks for completing the form, we will be in touch soon"
-      );
+      // alert(
+      //   "Message Sent! Thanks for completing the form, we will be in touch soon"
+      // );
+
+      toast.custom(customToast(), {
+        duration: 3000,
+        position: "top-center",
+      });
 
       // Reset form
       setFormData({
@@ -157,7 +182,9 @@ const Contactform = () => {
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full ${errors.name ? errorStyle : ""}`}
+                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                  errors.name ? errorStyle : ""
+                }`}
                 type="text"
                 name="name"
                 value={formData.name}
@@ -173,7 +200,9 @@ const Contactform = () => {
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full ${errors.last_name ? errorStyle : ""}`}
+                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                  errors.last_name ? errorStyle : ""
+                }`}
                 type="text"
                 name="last_name"
                 value={formData.last_name}
@@ -191,7 +220,9 @@ const Contactform = () => {
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
             <input
-              className={`w-full ${errors.email ? errorStyle : ""}`}
+              className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                errors.email ? errorStyle : ""
+              }`}
               type="email"
               name="email"
               value={formData.email}
@@ -210,10 +241,10 @@ const Contactform = () => {
 
             <div className="query__boxes flex flex-row w-full justify-between">
               <div
-                className={`query__general w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer
+                className={`query__general w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
                 ${
                   formData.query_type === "General Enquiry"
-                    ? "bg-[#E0F1E8] border-[#0C7D69]"
+                    ? "bg-[#E0F1E8] !border-[#0C7D69]"
                     : "bg-white"
                 }`}
                 onClick={() => handleQueryTypeSelect("General Enquiry")}
@@ -234,10 +265,10 @@ const Contactform = () => {
                 </div>
               </div>
               <div
-                className={`query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer
+                className={`query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
                 ${
                   formData.query_type === "Support Request"
-                    ? "bg-[#E0F1E8] border-[#0C7D69]"
+                    ? "bg-[#E0F1E8] !border-[#0C7D69]"
                     : "bg-white"
                 }`}
                 onClick={() => handleQueryTypeSelect("Support Request")}
@@ -268,7 +299,7 @@ const Contactform = () => {
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
-              className={`message__box w-full h-[105px] text-[18px] ${
+              className={`message__box duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2  w-full h-[105px] text-[18px] ${
                 errors.message ? errorStyle : ""
               }`}
               rows={3}
@@ -286,8 +317,12 @@ const Contactform = () => {
         </div>
       </form>
       {/* consent */}
-       <div className={`consent__container mb-[40px] ${errors.message ? "mt-[40px]" : ""}`}>
-        <div className="consent__box--text flex flex-row gap-2 mt-[40px] ">
+      <div
+        className={`consent__container mb-[40px] ${
+          errors.message ? "mt-[40px]" : ""
+        }`}
+      >
+        <div className="consent__box--text flex flex-row gap-2 mt-[40px] cursor-pointer">
           <Image
             src={isConsentChecked ? checkboxChecked : checkboxEmpty}
             alt={isConsentChecked ? "checkboxChecked" : "checkboxEmpty"}
@@ -296,7 +331,10 @@ const Contactform = () => {
             className="flex-shrink-0 mr-2 cursor-pointer"
             onClick={handleConsentToggle}
           />
-          <div className="consent__text text-[16px] leading-[150%]">
+          <div
+            className="consent__text text-[16px] leading-[150%]"
+            onClick={handleConsentToggle}
+          >
             I consent to being contacted by the team{" "}
             <span className="green--600 ml-[8px] ">*</span>
           </div>
@@ -311,10 +349,26 @@ const Contactform = () => {
         type="submit"
         disabled={isSubmitting}
         onClick={handleSubmit}
-        className="submit__button w-full h-[59px] rounded-[8px] bg-[#2A4144] text-white text-[18px] font-bold leading-[150%] cursor-pointer"
+        className="submit__button w-full h-[59px] rounded-[8px] bg-[#0C7D69] hover:bg-[#2A4144]  text-white text-[18px] font-bold leading-[150%] cursor-pointer duration-300"
       >
-        {isSubmitting ? "Sending..." : "Submit"}
+        {isSubmitting ? (
+          <span className="flex items-center justify-center animate-[pulse_1s_ease-in-out_infinite]">
+            Sending
+            <span className="inline-block animate-[pulse_1s_ease-in-out_infinite] ml-[2px]">
+              .
+            </span>
+            <span className="inline-block animate-[pulse_1s_ease-in-out_infinite_200ms] ml-[2px]">
+              .
+            </span>
+            <span className="inline-block animate-[pulse_1s_ease-in-out_infinite_400ms] ml-[2px]">
+              .
+            </span>
+          </span>
+        ) : (
+          "Submit"
+        )}
       </button>
+      <Toaster />
     </div>
   );
 };
