@@ -5,6 +5,7 @@ import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
 import checkboxChecked from "../assets/images/icon-checkbox-check.svg"
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
+import { z } from "zod";
 
 const Contactform = () => {
   //create object to send to emailjs
@@ -64,7 +65,7 @@ const Contactform = () => {
         publicKey
       );
 
-      alert("Message sent successfully!");
+      alert("Message Sent! Thanks for completing the form, we will be in touch soon");
       // Reset form
       setFormData({
         name: "",
