@@ -34,6 +34,8 @@ font-style: italic;
       "Courier New", monospace;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
     --font-weight-bold: 700;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
@@ -197,8 +199,14 @@ font-style: italic;
   .mx-auto {
     margin-inline: auto;
   }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
   }
   .mb-\[8px\] {
     margin-bottom: 8px;
@@ -293,8 +301,15 @@ font-style: italic;
   .rounded-\[16px\] {
     border-radius: 16px;
   }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
   .border-\[\#0C7D69\] {
     border-color: #0C7D69;
+  }
+  .border-\[\#D73C3C\] {
+    border-color: #D73C3C;
   }
   .bg-\[\#2A4144\] {
     background-color: #2A4144;
@@ -307,6 +322,10 @@ font-style: italic;
   }
   .p-\[40px\] {
     padding: 40px;
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
   }
   .text-\[18px\] {
     font-size: 18px;
@@ -328,6 +347,9 @@ font-style: italic;
   }
   .text-\[\#2A4144\] {
     color: #2A4144;
+  }
+  .text-\[\#D73C3C\] {
+    color: #D73C3C;
   }
   .text-white {
     color: var(--color-white);
@@ -371,6 +393,11 @@ button {
 .green--600 {
   color: #0C7D69;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-leading {
   syntax: "*";
   inherits: false;
@@ -391,6 +418,7 @@ button {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;
