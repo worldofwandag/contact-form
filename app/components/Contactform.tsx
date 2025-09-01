@@ -67,20 +67,41 @@ const Contactform = () => {
     e.preventDefault();
     setErrors({});
 
+    // Initialize errors object
+    const newErrors: { [key: string]: string } = {};
+
+    // Validate form data with Zod and check consent simultaneously
     try {
       formSchema.parse({
         ...formData,
       });
-
-      if (!isConsentChecked) {
-        setErrors((prev) => ({
-          ...prev,
-          consent: "To submit this form, please consent to being contacted",
-        }));
-        return;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        error.issues.forEach((issue) => {
+          const path = issue.path[0];
+          if (path) {
+            newErrors[path.toString()] = issue.message;
+          }
+        });
       }
+    }
 
+    // Check consent
+    if (!isConsentChecked) {
+      newErrors.consent =
+        "To submit this form, please consent to being contacted";
+    }
+
+    // If there are any errors, set them and return
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // If no errors, proceed with form submission
+    try {
       setIsSubmitting(true);
+
       if (!serviceId || !templateId || !publicKey) {
         throw new Error("EmailJS configuration missing");
       }
@@ -101,6 +122,7 @@ const Contactform = () => {
       alert(
         "Message Sent! Thanks for completing the form, we will be in touch soon"
       );
+
       // Reset form
       setFormData({
         name: "",
@@ -111,38 +133,27 @@ const Contactform = () => {
       });
       setIsConsentChecked(false);
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        const formattedErrors: { [key: string]: string } = {};
-        error.issues.forEach((issue) => {
-          const path = issue.path[0];
-          if (path) {
-            formattedErrors[path.toString()] = issue.message;
-          }
-        });
-        setErrors(formattedErrors);
-      } else {
-        console.error("Error sending email:", error);
-        alert("Failed to send message. Please try again");
-      }
+      console.error("Error sending email:", error);
+      alert("Failed to send message. Please try again");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const errorStyle = "border-[#D73C3C] border-2";
-  const errorTextStyle = "text-[#D73C3C] text-sm mt-2";
+  const errorStyle = "!border-[#D73C3C]";
+  const errorTextStyle = "text-[#D73C3C] text-sm mt-2 leading-[150%]";
 
   return (
     <div className="card__container flex flex-col bg-white min-h-[773px] w-[736px] rounded-[16px] p-[40px] ">
-      <form className="form__content w-[656px] mx-auto mb-[40px]">
+      <form className="form__content w-[656px] mx-auto">
         <h1 className="card__title text-[32px] font-bold text-[#2A4144] tracking-[-1px] mb-[32px]">
           Contact Us
         </h1>
-        <div className="card__fields flex flex-col ">
+        <div className="card__fields flex flex-col">
           {/* names */}
           <div className="name__fields flex flex-row w-full justify-between mb-[24px]">
             <div className="first__name w-[320px] h-[83px]">
-              <div className="first__name--text mb-[8px]">
+              <div className="first__name--text mb-[8px] text-[16px] leading-[150%]">
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
@@ -158,7 +169,7 @@ const Contactform = () => {
               )}
             </div>
             <div className="last__name w-[320px] h-[83px]">
-              <div className="last__name--text mb-[8px]">
+              <div className="last__name--text mb-[8px] text-[16px] leading-[150%]">
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
@@ -175,8 +186,8 @@ const Contactform = () => {
             </div>
           </div>
           {/* email */}
-          <div className="email__field mb-[24px] w-full">
-            <div className="email mb-[8px]">
+          <div className="email__field mb-[24px] w-full ">
+            <div className="email mb-[8px] text-[16px] leading-[150%]">
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
             <input
@@ -193,7 +204,7 @@ const Contactform = () => {
           </div>
           {/* query type */}
           <div className="query__type w-full h-[91px] mb-[24px]">
-            <div className="query__title mb-[16px]">
+            <div className="query__title mb-[16px] text-[16px] leading-[150%]">
               Query Type <span className="green--600 ml-[8px]">*</span>
             </div>
 
@@ -253,7 +264,7 @@ const Contactform = () => {
           </div>
           {/* Message */}
           <div className="message__field h-[137px] w-full">
-            <div className="message--text mb-[8px]">
+            <div className="message--text mb-[8px] text-[16px] leading-[150%]">
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
@@ -267,29 +278,34 @@ const Contactform = () => {
               required
             />
             {errors.message && (
-              <div className={errorTextStyle}>{errors.message}</div>
+              <div className={`${errorTextStyle} mb-[40px]`}>
+                {errors.message}
+              </div>
             )}
           </div>
         </div>
       </form>
       {/* consent */}
-      <div className="consent__container flex flex-row gap-2 mb-[40px]">
-        <Image
-          src={isConsentChecked ? checkboxChecked : checkboxEmpty}
-          alt={isConsentChecked ? "checkboxChecked" : "checkboxEmpty"}
-          width={24}
-          height={24}
-          className="flex-shrink-0 mr-2 cursor-pointer"
-          onClick={handleConsentToggle}
-        />
-        <div className="consent__text ">
-          I consent to being contacted by the team{" "}
-          <span className="green--600 ml-[8px]">*</span>
+       <div className={`consent__container mb-[40px] ${errors.message ? "mt-[40px]" : ""}`}>
+        <div className="consent__box--text flex flex-row gap-2 mt-[40px] ">
+          <Image
+            src={isConsentChecked ? checkboxChecked : checkboxEmpty}
+            alt={isConsentChecked ? "checkboxChecked" : "checkboxEmpty"}
+            width={24}
+            height={24}
+            className="flex-shrink-0 mr-2 cursor-pointer"
+            onClick={handleConsentToggle}
+          />
+          <div className="consent__text text-[16px] leading-[150%]">
+            I consent to being contacted by the team{" "}
+            <span className="green--600 ml-[8px] ">*</span>
+          </div>
         </div>
+
+        {errors.consent && (
+          <div className={`${errorTextStyle}`}>{errors.consent}</div>
+        )}
       </div>
-      {errors.consent && (
-        <div className={`${errorTextStyle} mb-4`}>{errors.consent}</div>
-      )}
       {/* submit */}
       <button
         type="submit"
