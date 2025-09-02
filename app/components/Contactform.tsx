@@ -3,7 +3,7 @@ import radioDeselect from "../assets/images/icon-radio-deselected.png";
 import radioSelect from "../assets/images/icon-radio-selected.svg";
 import checkboxEmpty from "../assets/images/icon-checkbox-empty.png";
 import checkboxChecked from "../assets/images/icon-checkbox-check.svg";
-import messageSuccess from "../assets/images/icon-success-check.svg"
+import messageSuccess from "../assets/images/icon-success-check.svg";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { z } from "zod";
@@ -19,22 +19,22 @@ const formSchema = z.object({
 
 const Contactform = () => {
   const customToast = () => (
-  <div className="flex flex-col text-white bg-[#2A4144] p-[24px] rounded-[12px] w-[450px] min-h-[107px]">
-    <div className="flex items-center mb-2">
-      <Image
-        src={messageSuccess}
-        alt="success"
-        width={24}
-        height={24}
-        className="flex-shrink-0 mr-2"
-      />
-      <span className="text-[18px] font-bold">Message sent!</span>
+    <div className="flex flex-col text-white bg-[#2A4144] p-[24px] rounded-[12px] w-[450px] min-h-[107px] mt-[54px]">
+      <div className="flex items-center mb-2">
+        <Image
+          src={messageSuccess}
+          alt="success"
+          width={24}
+          height={24}
+          className="flex-shrink-0 mr-2"
+        />
+        <span className="text-[18px] font-bold">Message sent!</span>
+      </div>
+      <span className="text-[16px] tracking-tighter">
+        Thanks for completing the form, we will be in touch soon!
+      </span>
     </div>
-    <span className="text-[16px] tracking-tighter">
-      Thanks for completing the form, we will be in touch soon
-    </span>
-  </div>
-);
+  );
 
   //create object to send to emailjs
   const [formData, setFormData] = useState({
@@ -143,10 +143,26 @@ const Contactform = () => {
       //   "Message Sent! Thanks for completing the form, we will be in touch soon"
       // );
 
-      toast.custom(customToast(), {
-        duration: 3000,
-        position: "top-center",
-      });
+      toast.custom(
+        (t) => (
+          <div
+            className={`${
+              t.visible
+                ? "animate-[fadeIn_1000ms_ease]"
+                : "animate-[fadeOut_1000ms_ease]"
+            }`}
+          >
+            {customToast()}
+          </div>
+        ),
+        {
+          duration: 3000,
+          position: "top-center",
+          style: {
+            marginTop: "240px", // Adjust this value to position the toast where you want it
+          },
+        }
+      );
 
       // Reset form
       setFormData({
