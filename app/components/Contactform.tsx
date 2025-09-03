@@ -246,7 +246,7 @@ const Contactform = () => {
             )}
           </div>
           {/* query type */}
-          <div className="query__type w-full h-[91px] max-[480px]:h-[126px] mb-[24px]">
+          <div className="query__type h-[91px] max-[480px]:h-[126px] mb-[24px]">
             <div className="query__title mb-[16px] text-[16px] leading-[150%]">
               Query Type <span className="green--600 ml-[8px]">*</span>
             </div>
@@ -311,7 +311,7 @@ const Contactform = () => {
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
-              className={`message__box duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
+              className={`message__box resize-none duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
                 errors.message ? errorStyle : ""
               }`}
               rows={3}
