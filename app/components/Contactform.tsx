@@ -19,7 +19,7 @@ const formSchema = z.object({
 
 const Contactform = () => {
   const customToast = () => (
-    <div className="flex flex-col text-white bg-[#2A4144] p-[24px] rounded-[12px] w-[450px] min-h-[107px] mt-[54px]">
+    <div className="flex flex-col text-white bg-[#2A4144] p-[24px] rounded-[12px] w-[450px] min-h-[107px] mt-[62px]">
       <div className="flex items-center mb-2">
         <Image
           src={messageSuccess}
@@ -139,10 +139,6 @@ const Contactform = () => {
         publicKey
       );
 
-      // alert(
-      //   "Message Sent! Thanks for completing the form, we will be in touch soon"
-      // );
-
       toast.custom(
         (t) => (
           <div
@@ -159,7 +155,7 @@ const Contactform = () => {
           duration: 3000,
           position: "top-center",
           style: {
-            marginTop: "240px", // Adjust this value to position the toast where you want it
+            marginTop: "240px", 
           },
         }
       );
@@ -185,20 +181,20 @@ const Contactform = () => {
   const errorTextStyle = "text-[#D73C3C] text-sm mt-2 leading-[150%]";
 
   return (
-    <div className="card__container flex flex-col bg-white min-h-[773px] w-[736px] rounded-[16px] p-[40px] ">
-      <form className="form__content w-[656px] mx-auto">
+    <div className="card__container flex flex-col bg-white min-h-[773px] w-[736px] max-[768px]:w-[690px] max-[690px]:w-[479px] max-[480px]:w-[343px] max-[768px]:min-h-[800px] max-[480px]:min-h-[1074px] rounded-[16px] p-[40px] max-[690px]:p-[24px] ">
+      <form className="form__content w-[656px] max-[768px]:w-[610px] max-[690px]:w-[431px] mx-auto">
         <h1 className="card__title text-[32px] font-bold text-[#2A4144] tracking-[-1px] mb-[32px]">
           Contact Us
         </h1>
         <div className="card__fields flex flex-col">
           {/* names */}
-          <div className="name__fields flex flex-row w-full justify-between mb-[24px]">
-            <div className="first__name w-[320px] h-[83px]">
+          <div className="name__fields flex flex-row max-[480px]:flex-col w-full justify-between max-[480px]:justify-center mb-[24px]">
+            <div className="first__name w-[320px] h-[83px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px] max-[480px]:mb-[24px]">
               <div className="first__name--text mb-[8px] text-[16px] leading-[150%]">
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                className={`w-full duration-200  cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
                   errors.name ? errorStyle : ""
                 }`}
                 type="text"
@@ -211,7 +207,7 @@ const Contactform = () => {
                 <div className={errorTextStyle}>{errors.name}</div>
               )}
             </div>
-            <div className="last__name w-[320px] h-[83px]">
+            <div className="last__name w-[320px] h-[83px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px]">
               <div className="last__name--text mb-[8px] text-[16px] leading-[150%]">
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
@@ -231,7 +227,7 @@ const Contactform = () => {
             </div>
           </div>
           {/* email */}
-          <div className="email__field mb-[24px] w-full ">
+          <div className="email__field mb-[24px] w-full max-[480px]:w-[295px] ">
             <div className="email mb-[8px] text-[16px] leading-[150%]">
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
@@ -250,14 +246,14 @@ const Contactform = () => {
             )}
           </div>
           {/* query type */}
-          <div className="query__type w-full h-[91px] mb-[24px]">
+          <div className="query__type w-full h-[91px] max-[480px]:h-[126px] mb-[24px]">
             <div className="query__title mb-[16px] text-[16px] leading-[150%]">
               Query Type <span className="green--600 ml-[8px]">*</span>
             </div>
 
-            <div className="query__boxes flex flex-row w-full justify-between">
+            <div className="query__boxes flex flex-row w-full justify-between  max-[480px]:flex-col">
               <div
-                className={`query__general w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
+                className={`query__general w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px] max-[480px]:mb-[16px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
                 ${
                   formData.query_type === "General Enquiry"
                     ? "bg-[#E0F1E8] !border-[#0C7D69]"
@@ -276,12 +272,12 @@ const Contactform = () => {
                   height={24}
                   className="flex-shrink-0 mr-2"
                 />
-                <div className="general__text text-[18px] leading-[150%]">
+                <div className="general__text text-[18px] max-[690px]:text-[16px] max-[480px]:text-[18px] leading-[150%]">
                   General Enquiry
                 </div>
               </div>
               <div
-                className={`query__support w-[320px] h-[51px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
+                className={`query__support w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px]  query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
                 ${
                   formData.query_type === "Support Request"
                     ? "bg-[#E0F1E8] !border-[#0C7D69]"
@@ -300,7 +296,7 @@ const Contactform = () => {
                   height={24}
                   className="flex-shrink-0 mr-2"
                 />
-                <div className="support__text text-[18px] leading-[150%]">
+                <div className="support__text text-[18px] leading-[150%] max-[690px]:text-[16px] max-[480px]:text-[18px]">
                   Support Request
                 </div>
               </div>
@@ -310,12 +306,12 @@ const Contactform = () => {
             )}
           </div>
           {/* Message */}
-          <div className="message__field h-[137px] w-full">
+          <div className="message__field h-[137px] w-full max-[480px]:w-[295px] max-[480px]:h-[272px] max-[480px]:mt-[40px]">
             <div className="message--text mb-[8px] text-[16px] leading-[150%]">
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
-              className={`message__box duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2  w-full h-[105px] text-[18px] ${
+              className={`message__box duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
                 errors.message ? errorStyle : ""
               }`}
               rows={3}
@@ -325,7 +321,7 @@ const Contactform = () => {
               required
             />
             {errors.message && (
-              <div className={`${errorTextStyle} mb-[40px]`}>
+              <div className={`${errorTextStyle} mb-[40px] max-[480px]:mb-[8px]`}>
                 {errors.message}
               </div>
             )}
@@ -338,7 +334,7 @@ const Contactform = () => {
           errors.message ? "mt-[40px]" : ""
         }`}
       >
-        <div className="consent__box--text flex flex-row gap-2 mt-[40px] cursor-pointer">
+        <div className="consent__box--text flex flex-row gap-2 mt-[40px] max-[768px]:mt-[78px] max-[480px]:mt-[40px] cursor-pointer items-center">
           <Image
             src={isConsentChecked ? checkboxChecked : checkboxEmpty}
             alt={isConsentChecked ? "checkboxChecked" : "checkboxEmpty"}
