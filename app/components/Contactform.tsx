@@ -194,7 +194,7 @@ const Contactform = () => {
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full duration-200  cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                className={`w-full duration-200  cursor-pointer hover:!border-[#0C7D69]  ${
                   errors.name ? errorStyle : ""
                 }`}
                 type="text"
@@ -212,7 +212,7 @@ const Contactform = () => {
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69]  ${
                   errors.last_name ? errorStyle : ""
                 }`}
                 type="text"
@@ -232,7 +232,7 @@ const Contactform = () => {
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
             <input
-              className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 ${
+              className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] ${
                 errors.email ? errorStyle : ""
               }`}
               type="email"
@@ -311,7 +311,7 @@ const Contactform = () => {
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
-              className={`message__box resize-none duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-2 w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
+              className={`message__box resize-none duration-200 cursor-pointer hover:!border-[#0C7D69] w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
                 errors.message ? errorStyle : ""
               }`}
               rows={3}
