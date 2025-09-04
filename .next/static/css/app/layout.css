@@ -425,11 +425,27 @@ font-style: italic;
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
+  .hover\:\!border-1 {
+    &:hover {
+      @media (hover: hover) {
+        border-style: var(--tw-border-style) !important;
+        border-width: 1px !important;
+      }
+    }
+  }
   .hover\:\!border-2 {
     &:hover {
       @media (hover: hover) {
         border-style: var(--tw-border-style) !important;
         border-width: 2px !important;
+      }
+    }
+  }
+  .hover\:\!border-\[1px\] {
+    &:hover {
+      @media (hover: hover) {
+        border-style: var(--tw-border-style) !important;
+        border-width: 1px !important;
       }
     }
   }
@@ -445,6 +461,17 @@ font-style: italic;
       @media (hover: hover) {
         background-color: #2A4144;
       }
+    }
+  }
+  .focus\:\!border-\[1px\] {
+    &:focus {
+      border-style: var(--tw-border-style) !important;
+      border-width: 1px !important;
+    }
+  }
+  .focus\:\!border-\[\#0C7D69\] {
+    &:focus {
+      border-color: #0C7D69 !important;
     }
   }
   .max-\[768px\]\:mt-\[78px\] {

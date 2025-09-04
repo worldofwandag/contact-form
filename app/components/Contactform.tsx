@@ -155,7 +155,7 @@ const Contactform = () => {
           duration: 3000,
           position: "top-center",
           style: {
-            marginTop: "240px", 
+            marginTop: "240px",
           },
         }
       );
@@ -194,7 +194,7 @@ const Contactform = () => {
                 First Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full duration-200  cursor-pointer hover:!border-[#0C7D69]  ${
+                className={`w-full duration-200  cursor-pointer hover:!border-[#0C7D69] hover:!border-[1px] focus:!border-[#0C7D69] focus:!border-[1px] ${
                   errors.name ? errorStyle : ""
                 }`}
                 type="text"
@@ -212,7 +212,7 @@ const Contactform = () => {
                 Last Name <span className="green--600 ml-[8px]">*</span>
               </div>
               <input
-                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69]  ${
+                className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-[1px]  focus:!border-[#0C7D69] focus:!border-[1px] ${
                   errors.last_name ? errorStyle : ""
                 }`}
                 type="text"
@@ -232,7 +232,7 @@ const Contactform = () => {
               Email Address <span className="green--600 ml-[8px]">*</span>
             </div>
             <input
-              className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] ${
+              className={`w-full duration-200 cursor-pointer hover:!border-[#0C7D69] hover:!border-[1px] focus:!border-[#0C7D69] focus:!border-[1px] ${
                 errors.email ? errorStyle : ""
               }`}
               type="email"
@@ -253,7 +253,7 @@ const Contactform = () => {
 
             <div className="query__boxes flex flex-row w-full justify-between  max-[480px]:flex-col">
               <div
-                className={`query__general w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px] max-[480px]:mb-[16px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
+                className={`query__general w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px] max-[480px]:mb-[16px] query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-1 focus:!border-[#0C7D69] focus:!border-[1px]
                 ${
                   formData.query_type === "General Enquiry"
                     ? "bg-[#E0F1E8] !border-[#0C7D69]"
@@ -277,7 +277,7 @@ const Contactform = () => {
                 </div>
               </div>
               <div
-                className={`query__support w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px]  query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-2
+                className={`query__support w-[320px] h-[51px] max-[768px]:w-[297px] max-[690px]:w-[calc(100%/2.1)] max-[480px]:w-[295px]  query__box flex flex-row items-center cursor-pointer duration-200 hover:!border-[#0C7D69] hover:!border-1 focus:!border-[#0C7D69] focus:!border-[1px]
                 ${
                   formData.query_type === "Support Request"
                     ? "bg-[#E0F1E8] !border-[#0C7D69]"
@@ -311,7 +311,7 @@ const Contactform = () => {
               Message <span className="green--600 ml-[8px]">*</span>{" "}
             </div>
             <textarea
-              className={`message__box resize-none duration-200 cursor-pointer hover:!border-[#0C7D69] w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] ${
+              className={`message__box resize-none duration-200 cursor-pointer hover:!border-[#0C7D69] w-full h-[105px] max-[768px]:h-[132px] max-[480px]:h-[240px] text-[18px] hover:!border-[1px] focus:!border-[#0C7D69] focus:!border-[1px] ${
                 errors.message ? errorStyle : ""
               }`}
               rows={3}
@@ -321,7 +321,9 @@ const Contactform = () => {
               required
             />
             {errors.message && (
-              <div className={`${errorTextStyle} mb-[40px] max-[480px]:mb-[8px]`}>
+              <div
+                className={`${errorTextStyle} mb-[40px] max-[480px]:mb-[8px]`}
+              >
                 {errors.message}
               </div>
             )}
